@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ICCT Campus Hub</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Link (KEPT) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+    <h1>ICCT CAMPUS HUB</h1>
+
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+</header>
+
+<main>
+    <section class="about-box">
+        <h2>Welcome to ICCT Campus Hub</h2>
+        <p>
+            This system allows students to register easily and view their information
+            on the dashboard. It demonstrates Modules 2–6 in Web Programming using
+            HTML, CSS, and JavaScript.
+        </p>
+
+        <!-- Friendly status message -->
+        <p id="studentCount" style="margin-top:15px; font-weight:600;"></p>
+    </section>
+</main>
+
+<footer>
+    © 2026 ICCT Campus Hub
+</footer>
+
+<!-- ✅ SIMPLE JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    const studentCount = document.getElementById("studentCount");
+
+    if (students.length === 0) {
+        studentCount.textContent = "No students registered yet. Go to Register to add students.";
+    } else {
+        studentCount.textContent = `Total Registered Students: ${students.length}`;
+    }
+});
+</script>
+
+</body>
+</html>
