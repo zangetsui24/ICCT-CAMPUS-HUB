@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Student Dashboard</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Registered Students</h2>
+
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th>Units</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Students will appear here dynamically -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    © 2026 ICCT Campus Hub 
+</footer>
+
+<!-- ✅ FUNCTIONAL JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.querySelector("#studentTable tbody");
+
+    // Get students from localStorage
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+
+    // If no students registered
+    if (students.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td colspan="4" style="text-align:center;">
+                No registered students yet
+            </td>
+        `;
+        tableBody.appendChild(row);
+        return;
+    }
+
+    // Display students
+    students.forEach(student => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.course}</td>
+            <td>${student.units}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+});
+</script>
+
+</body>
+</html>

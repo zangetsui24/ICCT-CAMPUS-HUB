@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Student Registration</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Fill out the form</h2>
+
+        <form id="studentForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter full name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter age" required>
+
+            <label for="course">Course:</label>
+            <input type="text" id="course" placeholder="Enter course (e.g. BSIT)" required>
+
+            <label for="units">Units:</label>
+            <input type="number" id="units" placeholder="Enter total units" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p id="message" style="margin-top:15px; font-weight:600;"></p>
+    </section>
+</main>
+
+<footer>
+    © 2026 ICCT Campus Hub 
+</footer>
+
+<!-- ✅ FUNCTIONAL JAVASCRIPT -->
+<script>
+document.getElementById("studentForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const age = document.getElementById("age").value;
+    const course = document.getElementById("course").value.trim();
+    const units = document.getElementById("units").value;
+    const message = document.getElementById("message");
+
+    // Simple validation
+    if (!name || !age || !course || !units) {
+        message.textContent = "Please fill in all fields.";
+        message.style.color = "red";
+        return;
+    }
+
+    const student = {
+        name: name,
+        age: age,
+        course: course,
+        units: units
+    };
+
+    // Get existing students
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+    students.push(student);
+
+    // Save back to localStorage
+    localStorage.setItem("students", JSON.stringify(students));
+
+    message.textContent = "Student registered successfully!";
+    message.style.color = "green";
+
+    // Clear form
+    this.reset();
+});
+</script>
+
+</body>
+</html>
